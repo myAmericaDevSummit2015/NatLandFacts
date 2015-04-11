@@ -2,6 +2,7 @@ small.text-muted.pull-right = pluralize facts.count, "result"
 table.table
   thead
     th #
+    th Type
     th Header
     th Description
     th Location
@@ -12,6 +13,7 @@ table.table
     - facts.each do |fact| 
       tr
         td = fact.position
+        td: span.label.label-default = fact.humanized_type
         td = link_to fact.title, edit_admin_fact_path(fact.id)
         td: small = fact.description.truncate(60)
         td = fact.location_title

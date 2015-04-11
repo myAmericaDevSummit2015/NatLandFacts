@@ -9,6 +9,14 @@
     = f.form_errors
 
     .form-group
+      = f.label :fact_type, "Type", class: "control-label col-md-3"
+      .col-md-8
+        - Fact.fact_types.each do |key, value| 
+          label.radio-inline.radio-inline-lg
+            => f.radio_button :fact_type, key
+            = t "activerecord.attributes.fact.fact_types.#{key}"
+
+    .form-group
       = f.label :title, "Header", class: "control-label col-md-3"
       .col-md-8
         = f.text_field :title, class: "form-control"

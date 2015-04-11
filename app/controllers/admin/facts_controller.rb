@@ -42,7 +42,7 @@ class Admin::FactsController < Admin::BaseController
   end
 
   def fact_params
-    params.require(:fact).permit(:title, :description)
+    params.require(:fact).permit(:fact_type, :title, :description)
   end
 
 end
