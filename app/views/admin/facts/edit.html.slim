@@ -1,0 +1,41 @@
+.pull-right
+  - if @fact.pending?
+    = link_to validate_admin_fact_path(@fact.id), method: :patch, class: "btn btn-success btn-sm" do
+      | Validate this Fact
+  - else
+    = link_to fact_path(@fact.id), class: "btn btn-default btn-sm" do
+      span.glyphicon.glyphicon-eye-open>
+      | Preview this Fact
+
+= link_to admin_facts_path, class: "btn btn-link pull-left" do
+  span.glyphicon.glyphicon-arrow-left>
+  | Back to the list
+
+h4.page-title
+  ' Edition of the fact
+  em=' @fact.title
+  - if @fact.pending?
+    span.label.label-warning pending
+  - else
+    span.label.label-success approved
+
+br
+.well
+  = form_for @fact, url: admin_fact_path(@fact.id), html: {class: 'form-horizontal'} do |f|
+    = f.form_errors
+
+    .form-group
+      = f.label :title, "Header", class: "control-label col-md-3"
+      .col-md-8
+        = f.text_field :title, class: "form-control"
+
+    .form-group
+      = f.label :description, "Description", class: "control-label col-md-3"
+      .col-md-8
+        = f.text_area :description, rows: 6, class: "form-control"
+    
+    .form-group
+      .col-md-8.col-md-offset-3
+        => f.submit "Update", class: "btn btn-primary", style: "margin-right:10px"
+        => f.submit name: "continue", value: "Update and continue", class: "btn btn-primary"
+        = link_to "Cancel", admin_facts_path, class: "btn"

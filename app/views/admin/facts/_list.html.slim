@@ -1,0 +1,37 @@
+small.text-muted.pull-right = pluralize facts.count, "result"
+table.table
+  thead
+    th #
+    th Header
+    th Description
+    th Location
+    th Creation date
+    th Approval date
+    th
+  tbody
+    - facts.each do |fact| 
+      tr
+        td = fact.position
+        td = link_to fact.title, edit_admin_fact_path(fact.id)
+        td: small = fact.description.truncate(60)
+        td = fact.location_title
+        td = I18n.l fact.created_at, format: :long
+        td
+          - if fact.pending?
+            span.text-muted -
+          - else
+            = I18n.l fact.validated_at, format: :long
+        td.text-right
+          => link_to fact_path(fact.id), class: "btn btn-default btn-xs", title: "Preview this Fact" do
+            span.glyphicon.glyphicon-eye-open
+          => link_to edit_admin_fact_path(fact.id), class: "btn btn-info btn-xs", title: "Edit this Fact" do
+            span.glyphicon.glyphicon-pencil
+          = link_to admin_fact_path(fact.id), method: :delete,
+            data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-danger" do
+            span.glyphicon.glyphicon-trash
+
+    - if facts.none?
+      tr
+        td colspan="6"
+          p.text-muted.text-center
+            em Nothing yet

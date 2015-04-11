@@ -6,6 +6,7 @@ class CreateFacts < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.integer :location_id
+      t.datetime :validated_at
       t.timestamps
     end
 

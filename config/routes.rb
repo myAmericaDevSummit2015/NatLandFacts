@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :facts, only: [:show, :new, :create]
 
   namespace :admin do
-    resources :facts, except: [:show, :new, :create]
+    resources :facts, except: [:show, :new, :create] do
+      member do
+        patch :validate
+      end
+    end
 
     root to: "facts#index"
   end

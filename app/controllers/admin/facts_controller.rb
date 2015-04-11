@@ -1,9 +1,10 @@
 class Admin::FactsController < Admin::BaseController
 
-  before_filter :find_fact, only: [:edit, :update, :destroy]
+  before_filter :find_fact, only: [:edit, :update, :destroy, :validate]
 
   def index
-    @facts = Fact.paginate(page: params[:page], per_page: 10)
+    @facts = Fact.validated.most_recent.paginate(page: params[:page], per_page: 10)
+    @pending_facts = Fact.pending.most_recent
   end
 
   def edit
@@ -25,7 +26,13 @@ class Admin::FactsController < Admin::BaseController
     else
       flash[:error] = @fact.errors.full_messages.first
     end
-    redirect_to admin_facts_path
+    redirect_to action: :index
+  end
+
+  def validate
+    @fact.touch(:validated_at)
+    flash[:notice] = "The Fact has been approved!"
+    redirect_to action: :index
   end
 
   private
@@ -35,7 +42,7 @@ class Admin::FactsController < Admin::BaseController
   end
 
   def fact_params
-    params.require(:fact).permit(:name)
+    params.require(:fact).permit(:title, :description)
   end
 
 end

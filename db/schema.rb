@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150411155232) do
     t.string   "title"
     t.text     "description"
     t.integer  "location_id"
+    t.datetime "validated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
