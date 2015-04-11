@@ -1,6 +1,7 @@
 class CreateFacts < ActiveRecord::Migration
   def change
     create_table :facts do |t|
+      t.integer :position
       t.integer :fact_type
       t.string :title
       t.text :description

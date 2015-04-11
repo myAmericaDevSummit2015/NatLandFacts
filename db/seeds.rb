@@ -1,7 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Admin
+admin1 = Admin.find_or_initialize_by(email: "pierre@hipcamp.com")
+admin1.update_attributes(password: "cherryblossom") if admin1.new_record?
+admin2 = Admin.find_or_initialize_by(email: "julian@hipcamp.com")
+admin2.update_attributes(password: "cherryblossom") if admin2.new_record?

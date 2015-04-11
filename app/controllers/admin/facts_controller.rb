@@ -11,17 +11,17 @@ class Admin::FactsController < Admin::BaseController
 
   def update
     if @fact.update_attributes(fact_params)
-      flash[:notice] = "Fact updated"
-      redirect_to params[:continue].present? ? edit_admin_fact_path(@fact) : admin_facts_path
+      flash[:notice] = "The Fact has been updated!"
+      redirect_to params[:continue].present? ? {action: :edit, id: @fact.id} : {action: :index}
     else
-      flash[:error] = "Couldn't update the fact"
+      flash[:error] = "An error occurred while updating the Fact."
       render :edit
     end
   end
 
   def destroy
     if @fact.destroy
-      flash[:notice] = "Fact deleted"
+      flash[:notice] = "The Fact has been deleted."
     else
       flash[:error] = @fact.errors.full_messages.first
     end

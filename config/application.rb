@@ -27,11 +27,11 @@ module Myamerica
 
     # css
     config.assets.precompile += %w(
-      admin.css
+      administration.css
     )
     # js
     config.assets.precompile += %w(
-      admin.js
+      administration.js
     )
   end
 end

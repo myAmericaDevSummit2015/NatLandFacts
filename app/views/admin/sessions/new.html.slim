@@ -1,0 +1,14 @@
+.row style="margin-top: 200px"
+  .col-xs-4.col-xs-offset-4
+    h3 Moderation zone
+    .well class="#{'shake' if flash[:alert].present?}"
+      = form_for resource, as: resource_name, url: session_path(resource_name),
+        html: {role: "form"} do |f| 
+      
+        div class="form-group#{' has-error' if flash[:alert].present?}"
+          = f.email_field :email, autofocus: true, placeholder: "email", class: "form-control"
+        div class="form-group#{' has-error' if flash[:alert].present?}"
+          = f.password_field :password, placeholder: "password", class: "form-control"
+
+        = f.submit "OK", class: "btn btn-primary btn-block"
+

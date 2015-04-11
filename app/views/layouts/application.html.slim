@@ -1,7 +1,7 @@
 doctype html
 html lang="en"
   head
-    title Fun Facts in !
+    title myAmerica
     meta http-equiv="content-type" content="text/html;charset=UTF-8"
 
     = stylesheet_link_tag "application", media: "all"
@@ -11,4 +11,13 @@ html lang="en"
     = content_for :to_header
 
   body
+    header
+      - if currently_in_section?(:show)
+        .add-new
+          = link_to new_fact_path, class: "btn btn-lg btn-primary" do
+            | Add a fun fact!
+      .lead.text-center
+        | fun facts
+
+
     = yield

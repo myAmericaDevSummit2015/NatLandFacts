@@ -1,0 +1,23 @@
+- content_for :current_navigation_section, :new
+
+.container
+  .row
+    .col-md-8.col-md-offset-3
+      h2 Add a new fact
+
+  = form_for @fact, url: facts_path, html: {class: 'form-horizontal'} do |f| 
+    = f.form_errors
+
+    .form-group
+      = f.label :title, "Header", class: "control-label col-md-3"
+      .col-md-8
+        = f.text_field :title, class: "form-control"
+
+    .form-group
+      = f.label :description, "Description", class: "control-label col-md-3"
+      .col-md-8
+        = f.text_area :description, rows: 6, class: "form-control"
+    
+    .form-group
+      .col-md-8.col-md-offset-3
+        = f.submit "Add", class: "btn btn-lg btn-primary"

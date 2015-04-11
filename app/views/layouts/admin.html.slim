@@ -1,0 +1,20 @@
+doctype html
+html lang="en"
+  head
+    title Admin
+    meta http-equiv="content-type" content="text/html;charset=UTF-8"
+
+    = stylesheet_link_tag "administration", media: "all"
+    = javascript_include_tag "administration"
+    = csrf_meta_tags
+      
+    = content_for :to_header
+
+  body
+    .container
+      .pull-right style="margin-top: 30px"
+        = link_to "sign out", destroy_admin_session_path,
+                  method: :delete, class: "btn btn-sm btn-default"
+
+      h1 Moderate facts
+      = yield

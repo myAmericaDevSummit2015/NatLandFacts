@@ -1,0 +1,34 @@
+h3 Last added facts
+
+small.text-muted.pull-right = pluralize @facts.count, "result"
+table.table
+  thead
+    th #
+    th Header
+    th Description
+    th Location
+    th Creation date
+    th
+  tbody
+    - @facts.each do |fact| 
+      tr
+        td = fact.position
+        td = fact.title
+        td: small = fact.description.truncate(60)
+        td = fact.location_title
+        td = I18n.l fact.created_at, format: :long
+        td.text-right
+          => link_to edit_admin_fact_path(fact.id), class: "btn btn-info btn-sm" do
+            span.glyphicon.glyphicon-pencil
+          = link_to admin_fact_path(fact.id), method: :delete,
+            data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger" do
+            span.glyphicon.glyphicon-trash
+
+    - if @facts.none?
+      tr
+        td colspan="6"
+          p.text-muted.text-center
+            em Nothing yet
+
+
+= will_paginate @facts, renderer: BootstrapPagination::Rails
