@@ -22,5 +22,16 @@ module Myamerica
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # ASSETS ===================================================================
+
+    # css
+    config.assets.precompile += %w(
+      admin.css
+    )
+    # js
+    config.assets.precompile += %w(
+      admin.js
+    )
   end
 end
