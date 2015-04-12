@@ -33,6 +33,10 @@
     .row
       .left-content.pic-bg style="background-image: url(#{@fact.pic_url})"
         .inner
+          .logo
+            = link_to root_path do
+              strong NatLand
+              | Facts
           .fact
             h2 = "#{@fact.humanized_type} NO. #{@fact.position}"
             = simple_format @fact.description
@@ -48,7 +52,7 @@
             - if @fact.lat && @fact.lng
               = "(#{@fact.lat.round(3)}° N, #{@fact.lng.abs.round(3)}° W)"
           
-          = simple_format @fact.location_description.truncate(900)
+          = simple_format @fact.location_description.truncate(800)
 
           = link_to "http://www.nationalparks.org/ook/every-kid-in-a-park", target: "_blank", class: "link-orange" do
             | Go here for free with Every Kid in a Park!
@@ -57,9 +61,9 @@
     .row
       .left-content
         = link_to another_fact_path(@fact.id), class: "fat-btn next" do
-          | Show me another fact!
+          | Another fact, please
       .right-content
         - if @official_link.present?
           = link_to @official_link, class: "fat-btn learn-more", target: "_blank" do
-            | Or learn more about #{@fact.location_title}
+            | Learn more about #{@fact.location_title}
 
