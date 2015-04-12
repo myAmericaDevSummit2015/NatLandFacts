@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   
   devise_for :admin, path_names: { sign_in: "sign-in" }
   
-  resources :facts, only: [:show, :new, :create]
+  resources :facts, only: [:show, :new, :create] do
+    member do
+      get :another
+    end
+  end
   
   resource :ridb, only: [], controller: 'ridb' do
     get :get_recreation_areas

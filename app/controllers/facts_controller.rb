@@ -2,11 +2,16 @@ class FactsController < ApplicationController
 
   def show
     if params[:id].blank?
-      @fact = Fact.validated.last
+      @fact = Fact.validated.sample
     else
       @fact = Fact.find_by(id: params[:id])
       redirect_to root_path if @fact.nil? || @fact.pending? && !admin_signed_in?
     end
+  end
+
+  def another
+    another_fact = Fact.validated.where.not(id: params[:id]).sample
+    redirect_to action: :show, id: another_fact.try(:id) || params[:id]
   end
 
   def new
@@ -20,7 +25,7 @@ class FactsController < ApplicationController
       flash[:notice] = "Your Fact has been submitted and is waiting for approval!"
       redirect_to action: :show
     else
-      flash[:error] = "An error occurred while creating your Fact."
+      flash[:error] = "Your Fact could not be submitted."
       render :new
     end
   end

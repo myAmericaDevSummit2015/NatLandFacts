@@ -13,14 +13,13 @@ html lang="en"
   body
     = raw flash_messages
     
-    header
+    .add-new
       - if currently_in_section?(:show)
-        .add-new
-          = link_to new_fact_path, class: "btn btn-lg btn-primary" do
-            | Add a fun fact!
-      .lead.text-center
-        | fun facts
-
+        = link_to new_fact_path, class: "btn btn-lg btn-rounded" do
+          | Submit your own fact!
+      - else
+        = link_to root_path, class: "btn btn-lg btn-rounded" do
+          | ← Back to the facts
 
     = yield
 

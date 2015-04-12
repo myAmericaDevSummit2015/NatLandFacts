@@ -1,54 +1,55 @@
 - content_for :current_navigation_section, :new
 
 .container
-  .row
-    .col-md-8.col-md-offset-3
-      h2 Add a new fact
-
-  = form_for @fact, url: facts_path, html: {class: 'form-horizontal'} do |f| 
-    = f.form_errors
-
-    = f.hidden_field :rec_area_id
-    = f.hidden_field :state_name
-    = f.hidden_field :location_title
-    = f.hidden_field :location_description
-    = f.hidden_field :lat
-    = f.hidden_field :lng
-
-    .form-group
-      = f.label :fact_type, "Type", class: "control-label col-md-3"
-      .col-md-8
-        - Fact.fact_types.each do |key, value| 
-          label.radio-inline.radio-inline-lg
-            => f.radio_button :fact_type, key
-            = t "activerecord.attributes.fact.fact_types.#{key}"
-
-    .form-group
-      = f.label :title, "Header", class: "control-label col-md-3"
-      .col-md-8
-        = f.text_field :title, class: "form-control"
-
-    .form-group
-      = f.label :description, "Description", class: "control-label col-md-3"
-      .col-md-8
-        = f.text_area :description, rows: 6, class: "form-control"  
-
-    .form-group
-      = f.label :rec_area_id, "Location", class: "control-label col-md-3"
-      .col-md-8
-        big#rec_area_name => f.object.try(:location_title)
-        = link_to "Select recreation area", "#", class: "btn btn-default btn-lg",
-          data: {toggle: 'modal', target: '#modal-select-location'}
-    
-    .form-group
-      = f.label :pic_url, "Picture URL", class: "control-label col-md-3"
-      .col-md-8
-        = f.text_field :pic_url, class: "form-control"
-        
-    .form-group
+  .well style="margin-top: 130px"
+    .row
       .col-md-8.col-md-offset-3
-        hr
-        = f.submit "Add this fact", class: "btn btn-lg btn-primary"
+        h2 Add a new fact
+
+    = form_for @fact, url: facts_path, html: {class: 'form-horizontal'} do |f| 
+      = f.form_errors
+
+      = f.hidden_field :rec_area_id
+      = f.hidden_field :state_name
+      = f.hidden_field :location_title
+      = f.hidden_field :location_description
+      = f.hidden_field :lat
+      = f.hidden_field :lng
+
+      .form-group
+        = f.label :fact_type, "Type", class: "control-label col-md-3"
+        .col-md-8
+          - Fact.fact_types.each do |key, value| 
+            label.radio-inline.radio-inline-lg
+              => f.radio_button :fact_type, key
+              = t "activerecord.attributes.fact.fact_types.#{key}"
+
+      .form-group
+        = f.label :title, "Header", class: "control-label col-md-3"
+        .col-md-8
+          = f.text_field :title, class: "form-control"
+
+      .form-group
+        = f.label :description, "Description", class: "control-label col-md-3"
+        .col-md-8
+          = f.text_area :description, rows: 6, class: "form-control"  
+
+      .form-group
+        = f.label :rec_area_id, "Location", class: "control-label col-md-3"
+        .col-md-8
+          big#rec_area_name => f.object.try(:location_title)
+          = link_to "Select recreation area", "#", class: "btn btn-default btn-lg",
+            data: {toggle: 'modal', target: '#modal-select-location'}
+      
+      .form-group
+        = f.label :pic_url, "Picture URL", class: "control-label col-md-3"
+        .col-md-8
+          = f.text_field :pic_url, class: "form-control"
+
+      .form-group
+        .col-md-8.col-md-offset-3
+          hr
+          = f.submit "Add this fact", class: "btn btn-lg btn-primary"
 
 
 = render partial: "modal_select_location"

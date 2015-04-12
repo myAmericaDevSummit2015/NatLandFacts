@@ -15,7 +15,7 @@ class Admin::FactsController < Admin::BaseController
       flash[:notice] = "The Fact has been updated!"
       redirect_to params[:continue].present? ? {action: :edit, id: @fact.id} : {action: :index}
     else
-      flash[:error] = "An error occurred while updating the Fact."
+      flash[:error] = "The Fact could not be updated."
       render :edit
     end
   end

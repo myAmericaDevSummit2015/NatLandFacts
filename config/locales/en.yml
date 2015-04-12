@@ -4,5 +4,5 @@ en:
       fact:
         fact_types:
           fun_fact: Fun fact
-          movie: Movie
-          history: History
+          movie: Movie fact
+          history: History fact

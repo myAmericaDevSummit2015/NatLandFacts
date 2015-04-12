@@ -1,3 +1,6 @@
+.well
+  color: #333
+
 .field_with_errors
   @extend .has-error
   display: inline
@@ -8,6 +11,24 @@
 
 .shake
   +animation(shake 400ms ease-in-out)
+
+
+.btn
+  +transition(background-color 0.3s ease 0s, border-color 0.4s ease 0s, color 0.4s ease 0s)
+  &:active
+    color: auto
+    background-color: auto
+
+.btn-rounded
+  font-weight: normal
+  color: #bbb
+  padding: 10px 20px
+  border: 1px solid #bbb
+  border-radius: 24px
+  &:hover
+    color: #444
+    background-color: #fff
+    border-color: #fff
 
 
 #flash

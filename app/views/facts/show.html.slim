@@ -1,10 +1,32 @@
 - content_for :current_navigation_section, :show
 
 - if @fact.nil?
-  .text-center
+  .text-center style="margin-top: 150px"
     | Nothing yet – add the first one!
-
 - else
-  h1 = @fact.title
 
-  = simple_format @fact.description
+  .content
+    .row
+      .left-content
+        .fact
+          h2 = "#{@fact.humanized_type} NO. #{@fact.position}"
+          = simple_format @fact.description
+          h1.title = @fact.title
+
+      .right-content
+        .map
+          #map
+        .area-details
+          h3 = @fact.location_title
+          small = "in #{@fact.state_name} (#{@fact.lat}° N, #{@fact.lng}° W)"
+          = simple_format @fact.location_description.truncate(900)
+
+  footer
+    .row
+      .left-content
+        = link_to another_fact_path(@fact.id), class: "fat-btn next" do
+          | Show me another fact!
+      .right-content
+        = link_to "", class: "fat-btn learn-more", target: "_blank" do
+          | Or learn more about #{@fact.location_title}
+
