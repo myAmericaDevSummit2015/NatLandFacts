@@ -7,11 +7,12 @@
 
   .content
     .row
-      .left-content
-        .fact
-          h2 = "#{@fact.humanized_type} NO. #{@fact.position}"
-          = simple_format @fact.description
-          h1.title = @fact.title
+      .left-content.pic-bg style="background-image: url(#{@fact.pic_url})"
+        .inner
+          .fact
+            h2 = "#{@fact.humanized_type} NO. #{@fact.position}"
+            = simple_format @fact.description
+            h1.title = @fact.title
 
       .right-content
         .map

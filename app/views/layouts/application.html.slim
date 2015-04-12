@@ -15,10 +15,10 @@ html lang="en"
     
     .add-new
       - if currently_in_section?(:show)
-        = link_to new_fact_path, class: "btn btn-lg btn-rounded" do
+        = link_to new_fact_path, class: "btn btn-rounded" do
           | Submit your own fact!
       - else
-        = link_to root_path, class: "btn btn-lg btn-rounded" do
+        = link_to root_path, class: "btn btn-rounded" do
           | ← Back to the facts
 
     = yield
