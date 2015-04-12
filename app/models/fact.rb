@@ -8,10 +8,12 @@ class Fact < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: true
   validates :fact_type, presence: true
-  # validates :rec_area_id, presence: true
-  # validates :location_title, presence: true
-  # validates :lat, presence: true
-  # validates :lng, presence: true
+  validates :rec_area_id, presence: true
+  validates :location_title, presence: true
+  validates :lat, presence: true
+  validates :lng, presence: true
+
+  before_validate :extract_area_info, if: :rec_area_id?
 
   scope :pending, -> { where validated_at: nil }
   scope :validated, -> { where.not validated_at: nil }
@@ -33,4 +35,12 @@ class Fact < ActiveRecord::Base
     I18n.t("activerecord.attributes.fact.fact_types.#{self.fact_type}")
   end
 
+  private
+
+  def extract_area_info
+    ridb = RIDB::Client.new(Rails.application.secrets.ridb_api_key)
+    # result = ridb.recreation_areas_by_state(params[:state])
+    # items = result.list(query: params[:name]).items
+  end
+  
 end

@@ -8,33 +8,54 @@
       
       .modal-body
         
-        = form_tag get_recreation_area_ridb_path(format: :json), remote: true,
+        = form_tag get_recreation_areas_ridb_path(format: :json), remote: true, method: :get,
           class: "form-horizontal", id: "form_search_rec_area" do
           .form-group
             label.control-label.col-md-3 State
             .col-md-9
               = select_tag 'state', options_for_select(Location::STATES),
-                {prompt: "Chose", class: "form-control", id: "select_state"}
+                {prompt: "Chose", class: "form-control"}
           .form-group
             label.control-label.col-md-3 Recreation area
             .col-md-9
-              = text_field_tag 'rec_arae_name', '', placeholder: "first letters...", class: "form-control"
+              = text_field_tag 'name', '', placeholder: "first letters...", class: "form-control"
 
           .form-group
             .col-md-9.col-md-offset-3
-              = submit_tag "Search", class: "btn btn-default"
+              = submit_tag "Search", class: "btn btn-primary", id: "submit_btn_search"
 
-
-      .modal-footer
-        button.btn.btn-default type="button" data-dismiss="modal" Close
-        button.btn.btn-primary type="button" Save changes
+        #results.area-results
 
 
 - content_for :scripts do
   coffee:
+    $results = $('#results')
+    $rec_area_id = $('#fact_rec_area_id')
+    $rec_area_name = $('#rec_area_name')
+
     $('#form_search_rec_area')
-      .on (event, xhr, error) ->
-        update_fields_cache()
+      .on 'submit', ->
+        $('#submit_btn_search').prop('disabled', true)
+      
+      .on 'ajax:success', (event, xhr, error) ->
+        $('#submit_btn_search').prop('disabled', false)
+        
+        if xhr.length is 0
+          $results.html('<hr/><p><strong>No results</strong></p>')          
+        else
+          $results.html('<hr/><p><strong>Select the right recreation area:</strong></p>')
+          $.each xhr, (i, res) ->
+            $li = $('<a href="#"></a>').attr('data-area-id', res.RecAreaID).text(res.RecAreaName)
+            $results.append $li
+
       .on 'ajax:error', (event, xhr, error) ->
-        if xhr.status is 422
-          show_errors($form, xhr.responseJSON)
+        $('#submit_btn_search').prop('disabled', false)
+        flash("An error occured", 'danger')
+    
+    $('#modal-select-location')
+      .on 'click', '[data-area-id]', (e) ->
+        e.preventDefault()
+        $('#modal-select-location').modal('hide')
+        $rec_area_id.value $(@).data('area-id')
+        $rec_area_name.text $(@).text()
+        false

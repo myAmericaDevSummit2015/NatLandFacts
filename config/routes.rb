@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :facts, only: [:show, :new, :create]
   
   resource :ridb, only: [], controller: 'ridb' do
-    post :get_recreation_area
+    get :get_recreation_areas
+    get :get_recreation_area
   end
 
   namespace :admin do
