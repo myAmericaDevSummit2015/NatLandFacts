@@ -1,9 +1,32 @@
 - content_for :current_navigation_section, :show
-
 - if @fact.nil?
   .text-center style="margin-top: 150px"
     | Nothing yet – add the first one!
 - else
+  - content_for :to_header do
+    = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true'
+    javascript:
+      var lat = #{@fact.lat};
+      var lng = #{@fact.lng};
+
+      function initialize() {
+        var myLatlng = new google.maps.LatLng(lat,lng);
+        var mapOptions = {
+          zoom: 8,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.TERRAIN
+        }
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: '#{@fact.title} here!'
+        });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize)
+
+
 
   .content
     .row
@@ -19,8 +42,8 @@
           #map
         .area-details
           h3 = @fact.location_title
-          small = "in #{@fact.state_name} (#{@fact.lat}° N, #{@fact.lng}° W)"
-          = simple_format @fact.location_description.truncate(900)
+          small = "in #{@fact.state_name} (#{@fact.lat.round(3)}° N, #{@fact.lng.abs.round(3)}° W)"
+          = simple_format @fact.location_description.truncate(1100)
 
   footer
     .row

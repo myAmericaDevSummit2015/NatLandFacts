@@ -1,11 +1,12 @@
 .pull-right
+  => link_to fact_path(@fact.id), class: "btn btn-default btn-sm" do
+    span.glyphicon.glyphicon-eye-open>
+    | Preview this Fact
+
   - if @fact.pending?
     = link_to validate_admin_fact_path(@fact.id), method: :patch, class: "btn btn-success btn-sm" do
       | Validate this Fact
-  - else
-    = link_to fact_path(@fact.id), class: "btn btn-default btn-sm" do
-      span.glyphicon.glyphicon-eye-open>
-      | Preview this Fact
+  
 
 = link_to admin_facts_path, class: "btn btn-link pull-left" do
   span.glyphicon.glyphicon-arrow-left>
@@ -52,7 +53,7 @@ br
     fieldset
       legend Recreation Area
       .form-group
-        = f.label :rec_area_id, "ID", class: "control-label col-md-3"
+        = f.label :rec_area_id, "Rec Area ID", class: "control-label col-md-3"
         .col-md-3
           = f.text_field :rec_area_id, class: "form-control"
       
