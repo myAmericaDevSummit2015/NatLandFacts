@@ -11,6 +11,8 @@ html lang="en"
     = content_for :to_header
 
   body
+    = raw flash_messages
+    
     header
       - if currently_in_section?(:show)
         .add-new
@@ -21,3 +23,5 @@ html lang="en"
 
 
     = yield
+
+    = content_for :scripts

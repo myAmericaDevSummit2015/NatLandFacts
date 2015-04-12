@@ -7,12 +7,8 @@ class CreateFacts < ActiveRecord::Migration
       t.text :description
       t.integer :location_id
       t.datetime :validated_at
-      t.timestamps
-    end
-
-    create_table :locations do |t|
       t.integer :rec_area_id
-      t.string :title
+      t.string :location_title
       t.decimal :lat
       t.decimal :lng
       t.timestamps

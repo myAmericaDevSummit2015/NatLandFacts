@@ -1,0 +1,40 @@
+.modal.fade#modal-select-location tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title Recreation area
+      
+      .modal-body
+        
+        = form_tag get_recreation_area_ridb_path(format: :json), remote: true,
+          class: "form-horizontal", id: "form_search_rec_area" do
+          .form-group
+            label.control-label.col-md-3 State
+            .col-md-9
+              = select_tag 'state', options_for_select(Location::STATES),
+                {prompt: "Chose", class: "form-control", id: "select_state"}
+          .form-group
+            label.control-label.col-md-3 Recreation area
+            .col-md-9
+              = text_field_tag 'rec_arae_name', '', placeholder: "first letters...", class: "form-control"
+
+          .form-group
+            .col-md-9.col-md-offset-3
+              = submit_tag "Search", class: "btn btn-default"
+
+
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close
+        button.btn.btn-primary type="button" Save changes
+
+
+- content_for :scripts do
+  coffee:
+    $('#form_search_rec_area')
+      .on (event, xhr, error) ->
+        update_fields_cache()
+      .on 'ajax:error', (event, xhr, error) ->
+        if xhr.status is 422
+          show_errors($form, xhr.responseJSON)

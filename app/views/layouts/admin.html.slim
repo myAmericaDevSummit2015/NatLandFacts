@@ -11,6 +11,8 @@ html lang="en"
     = content_for :to_header
 
   body
+    = raw flash_messages
+    
     .container
       .pull-right style="margin-top: 30px"
         = link_to "sign out", destroy_admin_session_path,

@@ -138,28 +138,16 @@ module RIDB
       response
     end
 
-    # SHORTCUTS FOR SOME YOSEMITE STUFF
-    def yosemite
-      # should be able to do
-      recreation_areas.get(2991)
-      # but there is a bug so we have to do
-      # recreation_areas.list(query: 'Yosemite National Park').items[2]
-    end
-
-    def camp_4
-      facilities.get(248547)
-    end
-
-    def wawona
-      facilities.get(232446)
-    end
-
     def organizations
       @_organizations ||= Resource.new(self,'organizations','OrgID')
     end
 
     def recreation_areas
       @_recareas ||= Resource.new(self,'recareas','RecAreaID')
+    end
+
+    def recreation_areas_by_state(state)
+      @_recareas ||= Resource.new(self,"recareas?state=#{state}",'RecAreaID')
     end
 
     def recreation_area_addresses

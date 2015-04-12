@@ -17,6 +17,7 @@ gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'coffee-rails', '~> 4.1.0'
 
 gem 'devise', '~> 3.4.1'
+gem 'faraday', '~> 0.9.1'
 
 gem 'acts_as_list', '~> 0.6.0'
 gem 'will_paginate', '~> 3.0.7'

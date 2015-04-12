@@ -41,13 +41,8 @@ ActiveRecord::Schema.define(version: 20150411155232) do
     t.text     "description"
     t.integer  "location_id"
     t.datetime "validated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "locations", force: :cascade do |t|
     t.integer  "rec_area_id"
-    t.string   "title"
+    t.string   "location_title"
     t.decimal  "lat"
     t.decimal  "lng"
     t.datetime "created_at"

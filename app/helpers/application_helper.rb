@@ -18,4 +18,28 @@ module ApplicationHelper
     content_tag :li, link_to(*args, &block), tag_options
   end
 
+
+  # Flash messages
+
+  FLASH_BS_TYPES = {
+    error:   "danger",
+    alert:   "warning",
+    warning: "warning",
+    notice:  "success"
+  }
+
+  def flash_messages
+    result = content_tag :div, "", id: "flash", style: "display:none"
+
+    FLASH_BS_TYPES.keys.each do |type|
+      if flash[type].present?
+        result << javascript_tag("flash('#{escape_javascript(flash[type])}', '#{FLASH_BS_TYPES[type]}')")
+        break
+      end
+    end
+    flash.discard
+
+    result
+  end
+
 end
