@@ -14,6 +14,8 @@ class FactsController < ApplicationController
       d['EntityID'] == @fact.rec_area_id && d['LinkType'] == 'Official Web Site'
     }.first
     @official_link = link_data['URL'] if link_data
+
+    @page_title = "#{@fact.title} in #{@fact.location_title}"
   end
 
   def another
