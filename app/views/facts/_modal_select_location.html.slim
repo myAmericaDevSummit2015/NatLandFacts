@@ -46,9 +46,9 @@
           $.each xhr, (i, res) ->
             $li = $('<a href="#"></a>')
                     .attr('data-area-id', res.RecAreaID)
-                    .attr('data-area-desc', res.RecAreaID)
-                    .attr('data-area-lat', res.RecAreaID)
-                    .attr('data-area-lng', res.RecAreaID)
+                    .attr('data-area-desc', res.RecAreaDescription)
+                    .attr('data-area-lat', res.RecAreaLatitude)
+                    .attr('data-area-lng', res.RecAreaLongitude)
                     .text(res.RecAreaName)
             $results.append $li
 
