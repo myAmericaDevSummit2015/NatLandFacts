@@ -14,7 +14,7 @@
         function initialize() {
           var myLatlng = new google.maps.LatLng(lat,lng);
           var mapOptions = {
-            zoom: 8,
+            zoom: 7,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.SATELLITE
           }
@@ -55,6 +55,7 @@
         = link_to another_fact_path(@fact.id), class: "fat-btn next" do
           | Show me another fact!
       .right-content
-        = link_to "", class: "fat-btn learn-more", target: "_blank" do
-          | Or learn more about #{@fact.location_title}
+        - if @official_link.present?
+          = link_to @official_link, class: "fat-btn learn-more", target: "_blank" do
+            | Or learn more about #{@fact.location_title}
 

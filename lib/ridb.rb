@@ -21,6 +21,7 @@ module RIDB
   # Available Resources:
   # * organizations
   # * recreation_areas
+  # * recreation_areas_by_state
   # * recreation_area_addresses
   # * facilities
   # * facility_addresses

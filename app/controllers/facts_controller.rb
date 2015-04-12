@@ -5,8 +5,15 @@ class FactsController < ApplicationController
       @fact = Fact.validated.sample
     else
       @fact = Fact.find_by(id: params[:id])
-      redirect_to root_path if @fact.nil? || @fact.pending? && !admin_signed_in?
+      redirect_to root_path and return if @fact.nil? || @fact.pending? && !admin_signed_in?
     end
+
+    ridb = RIDB::Client.new(Rails.application.secrets.ridb_api_key)
+    result = ridb.links.list(query: @fact.location_title).items
+    link_data = result.map(&:data).select{|d|
+      d['EntityID'] == @fact.rec_area_id && d['LinkType'] == 'Official Web Site'
+    }.first
+    @official_link = link_data['URL'] if link_data
   end
 
   def another
