@@ -14,9 +14,9 @@
         function initialize() {
           var myLatlng = new google.maps.LatLng(lat,lng);
           var mapOptions = {
-            zoom: 7,
+            zoom: 6,
             center: myLatlng,
-            mapTypeId: google.maps.MapTypeId.SATELLITE
+            mapTypeId: google.maps.MapTypeId.HYBRID
           }
           var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
