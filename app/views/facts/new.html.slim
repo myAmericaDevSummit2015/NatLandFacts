@@ -41,6 +41,11 @@
           data: {toggle: 'modal', target: '#modal-select-location'}
     
     .form-group
+      = f.label :pic_url, "Picture URL", class: "control-label col-md-3"
+      .col-md-8
+        = f.text_field :pic_url, class: "form-control"
+        
+    .form-group
       .col-md-8.col-md-offset-3
         hr
         = f.submit "Add this fact", class: "btn btn-lg btn-primary"

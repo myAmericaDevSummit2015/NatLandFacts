@@ -29,7 +29,7 @@ class FactsController < ApplicationController
 
   def fact_params
     params.require(:fact).permit(:fact_type, :title, :description, :state_name,
-      :rec_area_id, :location_title, :location_description, :lat, :lng)
+      :rec_area_id, :location_title, :location_description, :lat, :lng, :pic_url)
   end
 
 end

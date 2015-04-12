@@ -12,6 +12,8 @@ class Fact < ActiveRecord::Base
   validates :rec_area_id, presence: true
   validates :location_title, presence: true
 
+  before_validation :sanitize_pic_url
+
   scope :pending, -> { where validated_at: nil }
   scope :validated, -> { where.not validated_at: nil }
   scope :most_recent, -> { order created_at: :desc }
@@ -28,6 +30,15 @@ class Fact < ActiveRecord::Base
 
   def humanized_type
     I18n.t("activerecord.attributes.fact.fact_types.#{self.fact_type}")
+  end
+
+  private
+
+  # add "http://" to the picture url if not already
+  def sanitize_pic_url
+    if pic_url.present? && (pic_url =~ %r{\Ahttps?://}).nil?
+      self.pic_url = "http://#{pic_url}"
+    end
   end
 
 end
