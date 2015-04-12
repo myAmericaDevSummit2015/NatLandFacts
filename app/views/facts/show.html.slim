@@ -47,7 +47,11 @@
             => "in #{@fact.state_name}"
             - if @fact.lat && @fact.lng
               = "(#{@fact.lat.round(3)}° N, #{@fact.lng.abs.round(3)}° W)"
-          = simple_format @fact.location_description.truncate(1100)
+          
+          = simple_format @fact.location_description.truncate(900)
+
+          = link_to "http://www.nationalparks.org/ook/every-kid-in-a-park", target: "_blank", class: "link-orange" do
+            | Go here for free with Every Kid in a Park!
 
   footer
     .row
