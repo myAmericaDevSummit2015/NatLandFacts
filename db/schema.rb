@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150411155232) do
     t.integer  "location_id"
     t.datetime "validated_at"
     t.integer  "rec_area_id"
+    t.string   "state_name"
     t.string   "location_title"
     t.text     "location_description"
     t.decimal  "lat"

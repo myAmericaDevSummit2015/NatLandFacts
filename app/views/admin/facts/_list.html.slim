@@ -5,7 +5,8 @@ table.table
     th Type
     th Header
     th Description
-    th Location
+    th State
+    th Rec Area
     th Creation date
     th Approval date
     th
@@ -15,7 +16,8 @@ table.table
         td = fact.position
         td: span.label.label-default = fact.humanized_type
         td = link_to fact.title, edit_admin_fact_path(fact.id)
-        td: small = fact.description.truncate(60)
+        td: small = fact.description.truncate(50)
+        td = fact.state_name
         td = fact.location_title
         td = I18n.l fact.created_at, format: :long
         td
@@ -34,6 +36,6 @@ table.table
 
     - if facts.none?
       tr
-        td colspan="6"
+        td colspan="9"
           p.text-muted.text-center
             em Nothing yet

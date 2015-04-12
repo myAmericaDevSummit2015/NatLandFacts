@@ -8,10 +8,9 @@ class Fact < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: true
   validates :fact_type, presence: true
+  validates :state_name, presence: true, inclusion: {in: Location::STATES.keys}
   validates :rec_area_id, presence: true
   validates :location_title, presence: true
-  validates :lat, presence: true
-  validates :lng, presence: true
 
   scope :pending, -> { where validated_at: nil }
   scope :validated, -> { where.not validated_at: nil }

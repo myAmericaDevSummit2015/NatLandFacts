@@ -60,11 +60,16 @@
       .on 'click', '[data-area-id]', (e) ->
         e.preventDefault()
         $('#modal-select-location').modal('hide')
+
+        state_select = $('#state')[0]
+        $('#fact_state_name').val state_select.options[state_select.selectedIndex].text
+
         $('#fact_rec_area_id').val $(@).data('area-id')
         $('#fact_location_title').val $(@).text()
         $('#fact_location_description').val $(@).data('area-desc')
         $('#fact_lat').val $(@).data('area-lat')
         $('#fact_lng').val $(@).data('area-lng')
+        
         $rec_area_name.text $(@).text()
         false
 

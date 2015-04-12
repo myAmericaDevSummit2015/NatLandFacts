@@ -26,7 +26,7 @@ br
 
     .form-group
       = f.label :fact_type, "Type", class: "control-label col-md-3"
-      .col-md-8
+      .col-md-3
         = f.select :fact_type, Fact.types_for_select, {}, class: "form-control"
 
     .form-group
@@ -45,6 +45,11 @@ br
         = f.label :rec_area_id, "ID", class: "control-label col-md-3"
         .col-md-3
           = f.text_field :rec_area_id, class: "form-control"
+      
+      .form-group
+        = f.label :state_name, "State", class: "control-label col-md-3"
+        .col-md-3
+          = f.select :state_name, Location::STATES.keys, {prompt: "Chose"}, {class: "form-control"}
 
       .form-group
         = f.label :location_title, "Title", class: "control-label col-md-3"
