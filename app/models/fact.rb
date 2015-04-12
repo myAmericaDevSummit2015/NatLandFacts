@@ -13,13 +13,9 @@ class Fact < ActiveRecord::Base
   validates :lat, presence: true
   validates :lng, presence: true
 
-  before_validate :extract_area_info, if: :rec_area_id?
-
   scope :pending, -> { where validated_at: nil }
   scope :validated, -> { where.not validated_at: nil }
   scope :most_recent, -> { order created_at: :desc }
-
-  delegate :title, to: :location, prefix: true, allow_nil: true
 
 
   def self.types_for_select(hash = {})
@@ -35,12 +31,4 @@ class Fact < ActiveRecord::Base
     I18n.t("activerecord.attributes.fact.fact_types.#{self.fact_type}")
   end
 
-  private
-
-  def extract_area_info
-    ridb = RIDB::Client.new(Rails.application.secrets.ridb_api_key)
-    # result = ridb.recreation_areas_by_state(params[:state])
-    # items = result.list(query: params[:name]).items
-  end
-  
 end

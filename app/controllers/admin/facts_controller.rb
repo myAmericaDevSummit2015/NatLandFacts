@@ -42,7 +42,8 @@ class Admin::FactsController < Admin::BaseController
   end
 
   def fact_params
-    params.require(:fact).permit(:fact_type, :title, :description)
+    params.require(:fact).permit(:fact_type, :title, :description,
+      :rec_area_id, :location_title, :location_description, :lat, :lng)
   end
 
 end

@@ -30,7 +30,6 @@
 - content_for :scripts do
   coffee:
     $results = $('#results')
-    $rec_area_id = $('#fact_rec_area_id')
     $rec_area_name = $('#rec_area_name')
 
     $('#form_search_rec_area')
@@ -45,7 +44,12 @@
         else
           $results.html('<hr/><p><strong>Select the right recreation area:</strong></p>')
           $.each xhr, (i, res) ->
-            $li = $('<a href="#"></a>').attr('data-area-id', res.RecAreaID).text(res.RecAreaName)
+            $li = $('<a href="#"></a>')
+                    .attr('data-area-id', res.RecAreaID)
+                    .attr('data-area-desc', res.RecAreaID)
+                    .attr('data-area-lat', res.RecAreaID)
+                    .attr('data-area-lng', res.RecAreaID)
+                    .text(res.RecAreaName)
             $results.append $li
 
       .on 'ajax:error', (event, xhr, error) ->
@@ -56,6 +60,11 @@
       .on 'click', '[data-area-id]', (e) ->
         e.preventDefault()
         $('#modal-select-location').modal('hide')
-        $rec_area_id.value $(@).data('area-id')
+        $('#fact_rec_area_id').val $(@).data('area-id')
+        $('#fact_location_title').val $(@).text()
+        $('#fact_location_description').val $(@).data('area-desc')
+        $('#fact_lat').val $(@).data('area-lat')
+        $('#fact_lng').val $(@).data('area-lng')
         $rec_area_name.text $(@).text()
         false
+

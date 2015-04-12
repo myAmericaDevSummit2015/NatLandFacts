@@ -9,6 +9,7 @@ class CreateFacts < ActiveRecord::Migration
       t.datetime :validated_at
       t.integer :rec_area_id
       t.string :location_title
+      t.text :location_description
       t.decimal :lat
       t.decimal :lng
       t.timestamps

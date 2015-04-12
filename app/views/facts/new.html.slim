@@ -9,6 +9,10 @@
     = f.form_errors
 
     = f.hidden_field :rec_area_id
+    = f.hidden_field :location_title
+    = f.hidden_field :location_description
+    = f.hidden_field :lat
+    = f.hidden_field :lng
 
     .form-group
       = f.label :fact_type, "Type", class: "control-label col-md-3"
@@ -32,7 +36,7 @@
       .form-group
         = f.label :rec_area_id, "Location", class: "control-label col-md-3"
         .col-md-8
-          big#rec_area_name>
+          big#rec_area_name => f.object.try(:location_title)
           = link_to "Select recreation area", "#", class: "btn btn-default btn-lg",
             data: {toggle: 'modal', target: '#modal-select-location'}
     
