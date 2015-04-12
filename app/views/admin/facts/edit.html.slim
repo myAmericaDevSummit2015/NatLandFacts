@@ -14,7 +14,7 @@
 
 h4.page-title
   ' Edition of the fact
-  em=' @fact.title
+  em => @fact.title
   - if @fact.pending?
     span.label.label-warning pending
   - else
